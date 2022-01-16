@@ -1,0 +1,49 @@
+\documentclass[tikz,border=4]{standalone}
+\usepackage{tikz,}
+\usetikzlibrary{quotes,arrows,positioning}
+
+\begin{document}
+
+\definecolor{bleu}{RGB}{0,74,155}
+\definecolor{gris}{RGB}{155,155,155}
+\definecolor{rouge}{RGB}{230,56,18}
+
+
+\tikzset{
+    every picture/.style={line width=1pt}, 
+    every edge quotes/.style={auto},
+    >=stealth,
+    bullet/.style={circle,fill=black,inner sep=2pt},
+%    scale=.5,
+%    transform shape,
+    label position=left
+}
+
+\tikzset{bpix/.style={fill=bleu, rectangle, minimum size=.7cm}}
+
+
+\newcommand{\tableau}[2]{
+    \draw[step=.5cm,line width=2pt,line cap=rect] (0,0) grid (#1*0.5,#2*0.5);
+}
+
+\begin{tikzpicture}[font=\scriptsize,
+  grow=right,
+  level distance=.25\linewidth,
+  level 2/.style={sibling distance=2em}]
+  \node {D(3, A, C)} % root
+  child { node {D(2, B, C)}
+    child { node {D(1, A, C)} 
+      child {node[rouge] {A $\rightarrow$ C} } }
+    child { node[rouge] {B $\rightarrow$ C} }
+    child { node {D(1, B, A)} 
+      child {node[rouge] {B $\rightarrow$ A} } } }
+  child {node[rouge] {A $\rightarrow$ C} } 
+  child { node {D(2, A, B)}
+    child { node {D(1, C, B)} 
+      child {node[rouge] {C $\rightarrow$ B} } }
+    child { node[rouge] {A $\rightarrow$ B} }
+    child { node {D(1, A, C)} 
+      child {node[rouge] {A $\rightarrow$ C} } } };
+\end{tikzpicture}
+
+\end{document}

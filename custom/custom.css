@@ -1,0 +1,34 @@
+.defterm {
+  font-weight: bold;
+  color: red;
+}
+
+span.remarque {
+	color: grey;
+}
+
+span.footnote {
+	color: darkgray;
+}
+
+table.centered td, table.centered th {
+	text-align: center;
+}
+
+div.rounded {
+	margin: 2px;
+	padding: 2px;
+	border-radius: 5px;	
+}
+
+div.rounded.pink {
+	background-color: pink;
+}
+
+div.rounded.blue {
+	background-color: lightblue;
+}
+
+div.rounded.green {
+	background-color: lightgreen;
+}

@@ -1,0 +1,1 @@
+pdflatex -s reclistes2.tikz && convert -density 300 reclistes2.pdf reclistes2.png

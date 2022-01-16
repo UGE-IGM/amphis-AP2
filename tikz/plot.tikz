@@ -1,0 +1,46 @@
+\documentclass[tikz,border=4]{standalone}
+\usepackage{tikz}
+\usetikzlibrary{quotes,arrows,positioning}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.13}
+\usetikzlibrary{dateplot}
+
+
+\begin{document}
+
+\definecolor{bleu}{RGB}{0,74,155}
+\definecolor{gris}{RGB}{155,155,155}
+\definecolor{rouge}{RGB}{230,56,18}
+\definecolor{vert}{RGB}{78,100,26}
+
+
+\pgfplotsset{
+    legend style={
+        at={(0,1)},
+        anchor=north west,
+%         legend columns=2,
+        cells={anchor=west},
+        font=\footnotesize
+%         rounded corners=2pt,
+    }
+}
+
+\begin{tikzpicture}[scale=.55]
+\begin{axis}[
+    grid=major,
+    xlabel = {taille des donn\'ees},
+    ylabel = {temps d'ex\'ecution},
+    xmax = 20,
+    ymax = 44000]
+
+\addplot[mark=none,draw=bleu,sharp plot,very thick][domain=0:10] {2000*x};
+\addplot[mark=none,draw=vert,sharp plot,very thick][domain=0:10] {2^x};
+
+\addlegendentry{$f_1(n)$};
+\addlegendentry{$f_2(n)$};
+% \addplot +[thick] {exp(x)};
+% \addplot[domain=0:4] {x^2};
+\end{axis}
+\end{tikzpicture}
+
+\end{document}

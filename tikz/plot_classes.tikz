@@ -1,0 +1,234 @@
+\documentclass[tikz,border=4]{standalone}
+\usepackage{tikz}
+\usetikzlibrary{quotes,arrows,positioning}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.13}
+\usetikzlibrary{dateplot}
+
+
+\begin{document}
+
+\definecolor{bleu}{RGB}{0,74,155}
+\definecolor{gris}{RGB}{155,155,155}
+\definecolor{rouge}{RGB}{230,56,18}
+\definecolor{vert}{RGB}{78,100,26}
+
+
+\pgfplotsset{
+    legend style={
+        at={(0,1)},
+        anchor=north west,
+%         legend columns=2,
+        cells={anchor=west},
+        font=\footnotesize
+%         rounded corners=2pt,
+    }
+}
+
+% \begin{tikzpicture}[scale=.6]
+% \begin{axis}[
+%     grid=major,
+%     % xlabel = {x},
+%     % ylabel = {y},
+%     % ymin = -0.2,
+%     % ymax = 2.2,
+%     % scale mode = stretch to fill
+%     % ,xmax = 20
+%     % ,ymax = 44000
+% ]
+
+% \pgfplotsset{every axis plot/.append style={samples=100,mark=none,sharp plot,very thick}}
+
+% \addplot[draw=vert] [domain=1:100,y domain=0:2] {1};
+% \addplot[draw=vert] [domain=1:100,y domain=0:2] {ln(x)/ln(2) };
+% \addplot[draw=vert] [domain=1:100] {x};
+% \addplot[draw=vert] [domain=1:100] {x*ln(x)/ln(2)};
+% \addplot[draw=orange] [domain=1:100] {x^2};
+% \addplot[draw=orange] [domain=1:100] {x^3};
+% \addplot[draw=rouge] [domain=1:100] {2^x};
+
+% \addlegendentry{$y = 1$};
+% \addlegendentry{$y = log_2(x)$};
+% \addlegendentry{$y = x$};
+% \addlegendentry{$y = x \log_2(x)$};
+% \addlegendentry{$y = x^2$};
+% \addlegendentry{$y = x^3$};
+% \addlegendentry{$y = 2^x$};
+% \end{axis}
+% \end{tikzpicture}
+
+% \begin{tikzpicture}[scale=.6]
+% \begin{axis}[
+%     grid=major,
+%     % xlabel = {x},
+%     % ylabel = {y},
+%     % ymin = -0.2,
+%     % ymax = 2.2,
+%     % scale mode = stretch to fill
+%     % ,xmax = 20
+%     % ,ymax = 44000
+% ]
+
+% \pgfplotsset{every axis plot/.append style={samples=100,mark=none,sharp plot,very thick}}
+
+% \addplot[draw=vert] [domain=1:100,y domain=0:2] {1};
+% \addplot[draw=vert] [domain=1:100,y domain=0:2] {ln(x)/ln(2) };
+% \addplot[draw=vert] [domain=1:100] {x};
+% \addplot[draw=vert] [domain=1:100] {x*ln(x)/ln(2)};
+% \addplot[draw=orange] [domain=1:100] {x^2};
+% \addplot[draw=orange] [domain=1:100] {x^3};
+% \addplot[draw=rouge] [domain=1:100] {2^x};
+
+% \addlegendentry{$y = 1$};
+% \addlegendentry{$y = log_2(x)$};
+% \addlegendentry{$y = x$};
+% \addlegendentry{$y = x \log_2(x)$};
+% \addlegendentry{$y = x^2$};
+% \addlegendentry{$y = x^3$};
+% \addlegendentry{$y = 2^x$};
+% \end{axis}
+% \end{tikzpicture}
+
+\begin{tikzpicture}[scale=.6]
+\begin{axis}[
+    grid=major,
+    % xlabel = {x},
+    % ylabel = {y},
+    % ymin = -0.2,
+    % ymax = 2.2,
+    % scale mode = stretch to fill
+    % ,xmax = 20
+    % ,ymax = 44000
+]
+
+\pgfplotsset{every axis plot/.append style={samples=100,mark=none,sharp plot,very thick}}
+
+\addplot[draw=vert] [domain=1:100,y domain=0:2] {1};
+\addplot[draw=vert] [domain=1:100,y domain=0:2] {ln(x)/ln(2) };
+
+\addlegendentry{$y = 1$};
+\addlegendentry{$y = log_2(x)$};
+\end{axis}
+\end{tikzpicture}
+
+\begin{tikzpicture}[scale=.6]
+\begin{axis}[
+    grid=major,
+    % xlabel = {x},
+    % ylabel = {y},
+    % ymin = -0.2,
+    % ymax = 2.2,
+    % scale mode = stretch to fill
+    % ,xmax = 20
+    % ,ymax = 44000
+]
+
+\pgfplotsset{every axis plot/.append style={samples=100,mark=none,sharp plot,very thick}}
+
+\addplot[draw=vert] [domain=1:100,y domain=0:2] {ln(x)/ln(2) };
+\addplot[draw=vert] [domain=1:100] {x};
+
+\addlegendentry{$y = log_2(x)$};
+\addlegendentry{$y = x$};
+\end{axis}
+\end{tikzpicture}
+
+\begin{tikzpicture}[scale=.6]
+\begin{axis}[
+    grid=major,
+    % xlabel = {x},
+    % ylabel = {y},
+    % ymin = -0.2,
+    % ymax = 2.2,
+    % scale mode = stretch to fill
+    % ,xmax = 20
+    % ,ymax = 44000
+]
+
+\pgfplotsset{every axis plot/.append style={samples=100,mark=none,sharp plot,very thick}}
+
+\addplot[draw=vert] [domain=1:100,y domain=0:2] {1};
+\addplot[draw=vert] [domain=1:100,y domain=0:2] {ln(x)/ln(2) };
+\addplot[draw=vert] [domain=1:100] {x};
+
+\addlegendentry{$y = 1$};
+\addlegendentry{$y = log_2(x)$};
+\addlegendentry{$y = x$};
+\end{axis}
+\end{tikzpicture}
+
+\begin{tikzpicture}[scale=.6]
+\begin{axis}[
+    grid=major,
+    % xlabel = {x},
+    % ylabel = {y},
+    % ymin = -0.2,
+    % ymax = 2.2,
+    % scale mode = stretch to fill
+    % ,xmax = 20
+    % ,ymax = 44000
+]
+
+\pgfplotsset{every axis plot/.append style={samples=100,mark=none,sharp plot,very thick}}
+
+\addplot[draw=vert] [domain=1:100] {x};
+\addplot[draw=vert] [domain=1:100] {x*ln(x)/ln(2)};
+
+\addlegendentry{$y = x$};
+\addlegendentry{$y = x \log_2(x)$};
+\end{axis}
+\end{tikzpicture}
+
+\begin{tikzpicture}[scale=.6]
+\begin{axis}[
+    grid=major,
+    % xlabel = {x},
+    % ylabel = {y},
+    % ymin = -0.2,
+    % ymax = 2.2,
+    % scale mode = stretch to fill
+    % ,xmax = 20
+    % ,ymax = 44000
+]
+
+\pgfplotsset{every axis plot/.append style={samples=100,mark=none,sharp plot,very thick}}
+
+\addplot[draw=vert] [domain=1:100] {x*ln(x)/ln(2)};
+\addplot[draw=orange] [domain=1:100] {x^2};
+
+\addlegendentry{$y = x \log_2(x)$};
+\addlegendentry{$y = x^2$};
+\end{axis}
+\end{tikzpicture}
+
+\begin{tikzpicture}[scale=.6]
+\begin{axis}[
+    grid=major,
+]
+
+\pgfplotsset{every axis plot/.append style={samples=100,mark=none,sharp plot,very thick}}
+
+\addplot[draw=orange] [domain=1:100] {x^2};
+\addplot[draw=orange] [domain=1:100] {x^3};
+
+\addlegendentry{$y = x^2$};
+\addlegendentry{$y = x^3$};
+\end{axis}
+\end{tikzpicture}
+
+\begin{tikzpicture}[scale=.6]
+\begin{axis}[
+    grid=major,
+]
+
+\pgfplotsset{every axis plot/.append style={samples=100,mark=none,sharp plot,very thick}}
+
+\addplot[draw=orange] [domain=1:100] {x^3};
+\addplot[draw=rouge] [domain=1:100] {2^x};
+
+\addlegendentry{$y = x^3$};
+\addlegendentry{$y = 2^x$};
+\end{axis}
+\end{tikzpicture}
+
+\end{document}

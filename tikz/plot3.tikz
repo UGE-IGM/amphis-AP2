@@ -1,0 +1,70 @@
+\documentclass[tikz,border=4]{standalone}
+\usepackage{tikz}
+\usetikzlibrary{quotes,arrows,positioning}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.13}
+\usetikzlibrary{dateplot}
+
+
+\begin{document}
+
+\definecolor{bleu}{RGB}{0,74,155}
+\definecolor{gris}{RGB}{155,155,155}
+\definecolor{rouge}{RGB}{230,56,18}
+\definecolor{vert}{RGB}{78,100,26}
+
+
+\pgfplotsset{
+    legend style={
+        at={(0,1)},
+        anchor=north west,
+%         legend columns=2,
+        cells={anchor=west},
+        font=\footnotesize
+%         rounded corners=2pt,
+    }
+}
+
+    \begin{tikzpicture}[scale=.45]
+    \begin{axis}[
+        grid=major,
+        xlabel = {$n$}]
+    % \addplot[domain=0:10] {x};
+    % \addplot[domain=0:4] {x^3};
+    \addplot[samples=180,mark=none,draw=bleu,sharp plot,very thick][domain=0:1080] {x*abs(sin(x))};
+    \addplot[mark=none,draw=rouge,sharp plot,very thick][domain=0:1080] {x};
+    % \addplot[domain=0:4] {x^2};
+    \addlegendentry{$f(n) = n.|sin(n)|$};
+    \addlegendentry{$g(n) = n$};
+    \end{axis}
+    \end{tikzpicture}
+
+    \begin{tikzpicture}[scale=.45]
+    \begin{axis}[
+        grid=major,
+        xlabel = {$n$}]
+    % \addplot[domain=0:10] {x};
+    % \addplot[domain=0:4] {x^3};
+    \addplot[mark=none,draw=bleu,sharp plot,very thick][domain=0:10] {x*ln(x)};
+    \addplot[mark=none,draw=rouge,sharp plot,very thick] [domain=0:10] {(x-3)^2};
+    % \addplot[domain=0:4] {x^2};
+    \addlegendentry{$f(n) = n.ln(n)$};
+    \addlegendentry{$g(n) = (n-3)^2$};
+    \end{axis}
+    \end{tikzpicture}
+
+    \begin{tikzpicture}[scale=.45]
+    \begin{axis}[
+        grid=major,
+        xlabel = {$n$}]
+    % \addplot[domain=0:10] {x};
+    % \addplot[domain=0:4] {x^3};
+    \addplot[mark=none,draw=bleu,sharp plot,very thick][domain=0:30] {x};
+    \addplot[mark=none,draw=rouge,sharp plot,very thick] [domain=0:30] {3*x};
+    % \addplot[domain=0:4] {x^2};
+    \addlegendentry{$f(n) = n$};
+    \addlegendentry{$g(n) = 3n$};
+    \end{axis}
+    \end{tikzpicture}
+
+\end{document}
