@@ -52,8 +52,8 @@ class Call:
         res = []
         res.append("  |  " * self.depth + self.call_text())
         for subcall in self.subcalls:
-            res.append(" | " * (self.depth + 1))
-            res.append(subcall.trace())
+            res.append("  |  " * (self.depth + 1))
+            res.append(subcall.trace2())
         res.append("  |  " * (self.depth + 1))
         res.append("  |  " * self.depth + "  \__ résultat : " + str(self.res))
         return '\n'.join(res)
@@ -72,11 +72,21 @@ class Call:
     def node_name(number):
         return "node" + str(number)
 
-    def graph(self):
+    def graph(self, verbose_labels=True):
         G = gv.Graph(node_attr={'shape': 'plaintext'})
 
         def aux(call, current=0, parent=0):
-            label = call.call_text()
+            #label = call.call_text()
+            if verbose_labels:
+                label = """<
+                    <TABLE BORDER="0" CELLBORDER="0">
+                    <TR><TD><FONT COLOR='darkgreen'><I>appel {}</I></FONT></TD></TR>
+                    <TR><TD BORDER="1" STYLE="rounded"><FONT FACE="courier">{}</FONT></TD></TR>
+                    <TR><TD><FONT COLOR='red'>résultat : <FONT FACE="courier">{}</FONT></FONT></TD></TR>
+                    </TABLE>
+                    >""".format(current + 1, call.call_text(), str(call.res))
+            else:
+                label = call.call_text()
             name = Call.node_name(current)
             G.node(name, label=label)
             if parent < current:
