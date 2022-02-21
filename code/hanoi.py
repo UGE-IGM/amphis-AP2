@@ -1,6 +1,6 @@
 from upemtk import *
 
-nb_disques = 3
+nb_disques = 4
 nb_tours = 3
 largeur = 1000
 hauteur = 600

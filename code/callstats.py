@@ -86,7 +86,7 @@ class Call:
                     </TABLE>
                     >""".format(current + 1, call.call_text(), str(call.res))
             else:
-                label = call.call_text()
+                label = str(current + 1)
             name = Call.node_name(current)
             G.node(name, label=label)
             if parent < current:

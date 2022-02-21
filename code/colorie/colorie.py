@@ -1,6 +1,8 @@
 from random import randint
-from upemtk import *
+import fltk
 from time import sleep
+import argparse
+import PIL
 
 
 def coord_case(x, y):
@@ -11,7 +13,7 @@ def coord_case(x, y):
 
 def dessine_pixel(i, j, couleur):
     efface_pixel(i, j)
-    rectangle(marge + j * taille_px,
+    fltk.rectangle(marge + j * taille_px,
               marge + i * taille_px,
               marge + (j+1) * taille_px,
               marge + (i+1) * taille_px,
@@ -20,28 +22,28 @@ def dessine_pixel(i, j, couleur):
 
 
 def efface_pixel(i, j):
-    efface('ecran' + str(i) + '*' + str(j))
+    fltk.efface('ecran' + str(i) + '*' + str(j))
 
 
 def dessine_cercle(i, j, c):
     efface_cercle(i, j)
-    cercle(marge + j*taille_px + taille_px/2,
+    fltk.cercle(marge + j*taille_px + taille_px/2,
            marge + i*taille_px + taille_px/2,
            taille_px/4,
            couleur=c, remplissage=c,
            tag='cercle' + str(i) + '*' + str(j))
-    mise_a_jour()
+    fltk.mise_a_jour()
 
 
 def efface_cercle(i, j):
-    efface('cercle' + str(i) + '*' + str(j))
+    fltk.efface('cercle' + str(i) + '*' + str(j))
 
 
 def dessine_ecran(ecran, couleurs):
     for i in range(len(ecran)):
         for j in range(len(ecran[i])):
             dessine_pixel(i, j, couleurs[ecran[i][j]])
-    mise_a_jour()
+    fltk.mise_a_jour()
 
 
 def clignote(i, j, nv, nbfois=5, temps=0.05):
@@ -56,7 +58,7 @@ def clignote(i, j, nv, nbfois=5, temps=0.05):
     for _ in range(nbfois):
         for c in (nouvelle, ancienne):
             dessine_pixel(i, j, c)
-            mise_a_jour()
+            fltk.mise_a_jour()
             sleep(temps)
 
 
@@ -66,13 +68,13 @@ def dessine_fleche(i, j, c, direction):
     y_centre = marge + i*taille_px + taille_px/2
     dx = taille_px * 0.2 * direction[1]
     dy = taille_px * 0.2 * direction[0]
-    fleche(x_centre - dx, y_centre - dy, x_centre + dx, y_centre + dy,
+    fltk.fleche(x_centre - dx, y_centre - dy, x_centre + dx, y_centre + dy,
            tag='fleche' + str(i) + '*' + str(j), epaisseur=2, couleur=c)
-    mise_a_jour()
+    fltk.mise_a_jour()
 
 
 def efface_fleche(i, j):
-    efface('fleche' + str(i) + '*' + str(j))
+    fltk.efface('fleche' + str(i) + '*' + str(j))
 
 
 def remplit(i, j, c, pause=False, temps=0.5):
@@ -85,7 +87,7 @@ def remplit(i, j, c, pause=False, temps=0.5):
     if ecran[i][j] == c:
         return
 
-    clignote(i, j, c, temps=temps/10)
+    clignote(i, j, c, temps=temps/10, nbfois=0)
     ancienne = ecran[i][j]
     ecran[i][j] = c
     dessine_pixel(i, j, couleurs[c])
@@ -93,16 +95,16 @@ def remplit(i, j, c, pause=False, temps=0.5):
 
     for d in directions:
         if pause == 0:
-            _, _, t = attente_clic()
-            if t == 'ClicDroit':
+            ev = fltk.attend_ev()
+            if fltk.type_ev(ev) == 'ClicDroit':
                 exit()
         else:
-            if type_evenement(donne_evenement()) == 'ClicDroit':
+            if fltk.type_ev(fltk.donne_ev()) == 'ClicDroit':
                 exit()
             sleep(temps)
 
         efface_fleche(i, j)
-        mise_a_jour()
+        fltk.mise_a_jour()
 
         ii, jj = i + d[0], j + d[1]
         dessine_fleche(i, j, couleurs[c], d)
@@ -111,14 +113,14 @@ def remplit(i, j, c, pause=False, temps=0.5):
                 remplit(ii, jj, c, pause, temps)
 
     if pause == 0:
-        _, _, t = attente_clic()
-        if t == 'ClicDroit':
+        ev = fltk.attend_ev()
+        if fltk.type_ev(ev) == 'ClicDroit':
             exit()
     else:
         sleep(temps)
 
     efface_cercle(i, j)
-    mise_a_jour()
+    fltk.mise_a_jour()
 
 
 def nouvelle_couleur(i, j):
@@ -164,17 +166,21 @@ if __name__ == '__main__':
     nb_col = len(ecran[0])
     marge = 10
     taille_px = 50
-    cree_fenetre(2 * marge + nb_col * taille_px,
+    fltk.cree_fenetre(2 * marge + nb_col * taille_px,
                  2 * marge + nb_lignes * taille_px)
     dessine_ecran(ecran, couleurs)
 
     remplit(8, 6, 4)
 
-    x, y, t_clic = attente_clic()
-    while t_clic == 'ClicGauche':
+    ev = fltk.attend_ev()
+    tev = fltk.type_ev(ev)
+    x, y = fltk.abscisse(ev), fltk.ordonnee(ev)
+    while tev == 'ClicGauche':
         i, j = coord_case(x, y)
         nouv = nouvelle_couleur(i, j)
-        remplit(i, j, nouv, pause=1)
-        x, y, t_clic = attente_clic()
+        remplit(i, j, nouv, pause=True)
+        ev = fltk.attend_ev()
+        tev = fltk.type_ev(ev)
+        x, y = fltk.abscisse(ev), fltk.ordonnee(ev)
 
-    ferme_fenetre()
+    fltk.ferme_fenetre()
