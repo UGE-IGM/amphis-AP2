@@ -1,0 +1,338 @@
+% pdflatex -s -shell-escape dicho.tikz && convert -density 300 dicho.pdf PNG32:dicho-%d.png 
+
+\documentclass[tikz]{standalone}
+\usepackage{minted}
+
+\tikzstyle{val}=[rectangle,draw]
+\tikzstyle{var}=[rectangle,rounded corners=1.5ex,draw,bleu,minimum size=3ex]
+\tikzstyle{aff}=[->,thick]
+\tikzset{
+  every node/.style={font=\footnotesize},
+  instr/.style={rectangle,draw=black!70},
+  test/.style={rectangle,rounded corners,draw=bleu!70,text=bleu},
+  every edge/.style={>=stealth,semithick,bend angle=45,draw,->},
+  every edge quotes/.style={inner sep=.5em,font=\scriptsize,color=orange},
+  vrai/.style={left,"vrai"},
+  faux/.style={right,"faux"},
+}
+
+\newcommand{\tableau}[2]{
+    \draw[step=.5cm,line width=2pt,line cap=rect] (0,0) grid (#1*0.5,#2*0.5);
+}
+
+\setminted{
+linenos=False,
+mathescape,
+texcomments,
+escapeinside=||,
+fontfamily=tt
+}
+\newminted[python]{python3}{}
+\newminted[pycon]{pycon}{python3}
+\newminted[shell]{shell-session}{}
+\newmintinline[pyinline]{python3}{}
+\newmintedfile[pyfile]{python3}{}
+
+\newcommand{\code}[2][]{\pyinline[#1]!#2!}
+
+\newenvironment{pyframe}[2][\linewidth]{%
+  \VerbatimEnvironment
+  \begin{center}%
+  \begin{minipage}{#1}%
+  \begin{beamerboxesrounded}{#2}%
+  \begin{python}}
+{%
+  \end{python}%
+  \end{beamerboxesrounded}%
+  \end{minipage}%
+  \end{center}}
+
+
+\newcommand{\exempledichotomiecontenu}{
+    \node at (0.25,0.25) {\tiny 1};
+    \node at (0.75,0.25) {\tiny 3};
+    \node at (1.25,0.25) {\tiny 3};
+    \node at (1.75,0.25) {\tiny 4};
+    \node at (2.25,0.25) {\tiny 7};
+    \node at (2.75,0.25) {\tiny 19};
+    \node at (3.25,0.25) {\tiny 47};
+    \node at (3.75,0.25) {\tiny 47};
+    \node at (4.25,0.25) {\tiny 53};
+    \node at (4.75,0.25) {\tiny 65};
+    \node at (5.25,0.25) {\tiny 66};
+    \node at (5.75,0.25) {\tiny 81};
+    \node at (6.25,0.25) {\tiny 86};
+    \node at (6.75,0.25) {\tiny 112};
+    \node at (7.25,0.25) {\tiny 137};
+    \node at (7.75,0.25) {\tiny 157};
+    \node at (8.25,0.25) {\tiny 163};
+    \node at (8.75,0.25) {\tiny 188};
+    \node at (9.25,0.25) {\tiny 413};
+    \node at (9.75,0.25) {\tiny 757};
+}
+
+\newcommand{\exempledichotomieindices}{
+    \node at (0.25,0.75) {\tiny  0};
+    \node at (0.75,0.75) {\tiny  1};
+    \node at (1.25,0.75) {\tiny  2};
+    \node at (1.75,0.75) {\tiny  3};
+    \node at (2.25,0.75) {\tiny  4};
+    \node at (2.75,0.75) {\tiny  5};
+    \node at (3.25,0.75) {\tiny  6};
+    \node at (3.75,0.75) {\tiny  7};
+    \node at (4.25,0.75) {\tiny  8};
+    \node at (4.75,0.75) {\tiny  9};
+    \node at (5.25,0.75) {\tiny 10};
+    \node at (5.75,0.75) {\tiny 11};
+    \node at (6.25,0.75) {\tiny 12};
+    \node at (6.75,0.75) {\tiny 13};
+    \node at (7.25,0.75) {\tiny 14};
+    \node at (7.75,0.75) {\tiny 15};
+    \node at (8.25,0.75) {\tiny 16};
+    \node at (8.75,0.75) {\tiny 17};
+    \node at (9.25,0.75) {\tiny 18};
+    \node at (9.75,0.75) {\tiny 19};
+}
+
+\begin{document}
+
+
+\begin{tikzpicture} % 1
+\tableau{20}{1};
+% contenu
+\exempledichotomiecontenu;
+% positions
+\exempledichotomieindices;
+
+% verifier élément du milieu
+\node at (0.25,1.05) {\code{g}};
+\node at (9.75,1.10) {\code{d}};
+\end{tikzpicture}
+
+
+\begin{tikzpicture} % 2
+\tableau{20}{1};
+% contenu
+\exempledichotomiecontenu;
+% positions
+\exempledichotomieindices;
+
+% verifier élément du milieu
+\node at (0.25,1.05) {\code{g}};
+\node at (9.75,1.10) {\code{d}};
+\node[fill=blue,opacity=.5,inner sep=7pt] at (4.75, 0.25) {};
+\node at (4.75,1.05) {\code{m}};
+\end{tikzpicture}
+
+
+\begin{tikzpicture} % 3
+\tableau{20}{1};
+% contenu
+\exempledichotomiecontenu;
+% positions
+\exempledichotomieindices;
+
+% verifier élément du milieu
+\node at (0.25,1.05) {\code{g}};
+\node at (9.75,1.10) {\code{d}};
+\node at (4.75,1.05) {\code{m}};
+\foreach \p in {0.25, 0.75, ..., 4.75}
+        \node[fill=red,opacity=.5,inner sep=7pt] at (\p, 0.25) {};
+\end{tikzpicture}
+
+
+\begin{tikzpicture} % 4
+\tableau{20}{1};
+% contenu
+\exempledichotomiecontenu;
+% positions
+\exempledichotomieindices;
+
+% verifier élément du milieu
+\foreach \p in {0.25, 0.75, ..., 4.75}
+        \node[fill=red,opacity=.5,inner sep=7pt] at (\p, 0.25) {};
+\node at (5.25,1.05) {\code{g}};
+\node at (9.75,1.10) {\code{d}};
+\end{tikzpicture}
+
+
+\begin{tikzpicture} % 5
+\tableau{20}{1};
+% contenu
+\exempledichotomiecontenu;
+% positions
+\exempledichotomieindices;
+
+% verifier élément du milieu
+\foreach \p in {0.25, 0.75, ..., 4.75}
+        \node[fill=red,opacity=.5,inner sep=7pt] at (\p, 0.25) {};
+\node at (5.25,1.05) {\code{g}};
+\node at (9.75,1.10) {\code{d}};
+\node at (7.25,1.05) {\code{m}};
+\node[fill=blue,opacity=.5,inner sep=7pt] at (7.25, 0.25) {};
+\end{tikzpicture}
+
+
+\begin{tikzpicture} % 6
+\tableau{20}{1};
+% contenu
+\exempledichotomiecontenu;
+% positions
+\exempledichotomieindices;
+
+% verifier élément du milieu
+\foreach \p in {0.25, 0.75, ..., 4.75}
+        \node[fill=red,opacity=.5,inner sep=7pt] at (\p, 0.25) {};
+\node at (5.25,1.05) {\code{g}};
+\node at (9.75,1.10) {\code{d}};
+\node at (7.25,1.05) {\code{m}};
+\foreach \p in {7.25, 7.75, ..., 9.75}
+    \node[fill=red,opacity=.5,inner sep=7pt] at (\p, 0.25) {};
+\end{tikzpicture}
+
+
+\begin{tikzpicture} % 7
+\tableau{20}{1};
+% contenu
+\exempledichotomiecontenu;
+% positions
+\exempledichotomieindices;
+
+% verifier élément du milieu
+\foreach \p in {0.25, 0.75, ..., 4.75}
+        \node[fill=red,opacity=.5,inner sep=7pt] at (\p, 0.25) {};
+\foreach \p in {7.25, 7.75, ..., 9.75}
+    \node[fill=red,opacity=.5,inner sep=7pt] at (\p, 0.25) {};
+\node at (5.25,1.05) {\code{g}};
+\node at (6.75,1.10) {\code{d}};
+\end{tikzpicture}
+
+
+\begin{tikzpicture} % 8
+\tableau{20}{1};
+% contenu
+\exempledichotomiecontenu;
+% positions
+\exempledichotomieindices;
+
+% verifier élément du milieu
+\foreach \p in {0.25, 0.75, ..., 4.75}
+        \node[fill=red,opacity=.5,inner sep=7pt] at (\p, 0.25) {};
+\foreach \p in {7.25, 7.75, ..., 9.75}
+    \node[fill=red,opacity=.5,inner sep=7pt] at (\p, 0.25) {};
+\node at (5.25,1.05) {\code{g}};
+\node at (6.75,1.10) {\code{d}};
+\node at (5.75,1.05) {\code{m}};
+\node[fill=blue,opacity=.5,inner sep=7pt] at (5.75, 0.25) {};
+\end{tikzpicture}
+
+
+\begin{tikzpicture} % 9
+\tableau{20}{1};
+% contenu
+\exempledichotomiecontenu;
+% positions
+\exempledichotomieindices;
+
+% verifier élément du milieu
+\foreach \p in {0.25, 0.75, ..., 5.75}
+        \node[fill=red,opacity=.5,inner sep=7pt] at (\p, 0.25) {};
+\foreach \p in {7.25, 7.75, ..., 9.75}
+    \node[fill=red,opacity=.5,inner sep=7pt] at (\p, 0.25) {};
+\node at (5.25,1.05) {\code{g}};
+\node at (6.75,1.10) {\code{d}};
+\node at (5.75,1.05) {\code{m}};
+\end{tikzpicture}
+
+
+\begin{tikzpicture} % 10
+\tableau{20}{1};
+% contenu
+\exempledichotomiecontenu;
+% positions
+\exempledichotomieindices;
+
+% verifier élément du milieu
+\foreach \p in {0.25, 0.75, ..., 5.75}
+        \node[fill=red,opacity=.5,inner sep=7pt] at (\p, 0.25) {};
+\foreach \p in {7.25, 7.75, ..., 9.75}
+    \node[fill=red,opacity=.5,inner sep=7pt] at (\p, 0.25) {};
+\node at (6.25,1.05) {\code{g}};
+\node at (6.75,1.10) {\code{d}};
+\end{tikzpicture}
+
+
+\begin{tikzpicture} % 11
+\tableau{20}{1};
+% contenu
+\exempledichotomiecontenu;
+% positions
+\exempledichotomieindices;
+
+% verifier élément du milieu
+\foreach \p in {0.25, 0.75, ..., 5.75}
+        \node[fill=red,opacity=.5,inner sep=7pt] at (\p, 0.25) {};
+\foreach \p in {7.25, 7.75, ..., 9.75}
+    \node[fill=red,opacity=.5,inner sep=7pt] at (\p, 0.25) {};
+\node at (6.25,1.05) {\code{g}};
+\node at (6.75,1.10) {\code{d}};
+\node at (6.25,-0.5) {\code{m}};
+\node[fill=blue,opacity=.5,inner sep=7pt] at (6.25, 0.25) {};
+\end{tikzpicture}
+
+
+\begin{tikzpicture} % 12
+\tableau{20}{1};
+% contenu
+\exempledichotomiecontenu;
+% positions
+\exempledichotomieindices;
+
+% verifier élément du milieu
+\foreach \p in {0.25, 0.75, ..., 6.25}
+        \node[fill=red,opacity=.5,inner sep=7pt] at (\p, 0.25) {};
+\foreach \p in {7.25, 7.75, ..., 9.75}
+    \node[fill=red,opacity=.5,inner sep=7pt] at (\p, 0.25) {};
+\node at (6.25,1.05) {\code{g}};
+\node at (6.75,1.10) {\code{d}};
+\node at (6.25,-0.5) {\code{m}};
+\end{tikzpicture}
+
+
+\begin{tikzpicture} % 13
+\tableau{20}{1};
+% contenu
+\exempledichotomiecontenu;
+% positions
+\exempledichotomieindices;
+
+% verifier élément du milieu
+\foreach \p in {0.25, 0.75, ..., 6.25}
+        \node[fill=red,opacity=.5,inner sep=7pt] at (\p, 0.25) {};
+\foreach \p in {7.25, 7.75, ..., 9.75}
+    \node[fill=red,opacity=.5,inner sep=7pt] at (\p, 0.25) {};
+\node at (6.75,1.5) {\code{g}};
+\node at (6.75,1.10) {\code{d}};
+\end{tikzpicture}
+
+
+\begin{tikzpicture} % 13
+\tableau{20}{1};
+% contenu
+\exempledichotomiecontenu;
+% positions
+\exempledichotomieindices;
+
+% verifier élément du milieu
+\foreach \p in {0.25, 0.75, ..., 6.25}
+        \node[fill=red,opacity=.5,inner sep=7pt] at (\p, 0.25) {};
+\foreach \p in {7.25, 7.75, ..., 9.75}
+    \node[fill=red,opacity=.5,inner sep=7pt] at (\p, 0.25) {};
+\node at (6.75,1.5) {\code{g}};
+\node at (6.75,1.10) {\code{d}};
+\node at (6.75,-0.5) {\code{m}};
+\node[fill=green,opacity=.5,inner sep=7pt] at (6.75, 0.25) {};
+\end{tikzpicture}
+
+
+\end{document}
