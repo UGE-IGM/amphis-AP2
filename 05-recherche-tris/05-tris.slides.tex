@@ -20,54 +20,6 @@
 % \AtBeginSubsection{\frame{\subsectionpage}}
 
 
-\newcommand{\exempledichotomiecontenu}{
-    \node at (0.25,0.25) {\tiny 1};
-    \node at (0.75,0.25) {\tiny 3};
-    \node at (1.25,0.25) {\tiny 3};
-    \node at (1.75,0.25) {\tiny 4};
-    \node at (2.25,0.25) {\tiny 7};
-    \node at (2.75,0.25) {\tiny 19};
-    \node at (3.25,0.25) {\tiny 47};
-    \node at (3.75,0.25) {\tiny 47};
-    \node at (4.25,0.25) {\tiny 53};
-    \node at (4.75,0.25) {\tiny 65};
-    \node at (5.25,0.25) {\tiny 66};
-    \node at (5.75,0.25) {\tiny 81};
-    \node at (6.25,0.25) {\tiny 86};
-    \node at (6.75,0.25) {\tiny 112};
-    \node at (7.25,0.25) {\tiny 137};
-    \node at (7.75,0.25) {\tiny 157};
-    \node at (8.25,0.25) {\tiny 163};
-    \node at (8.75,0.25) {\tiny 188};
-    \node at (9.25,0.25) {\tiny 413};
-    \node at (9.75,0.25) {\tiny 757};
-}
-
-\newcommand{\exempledichotomieindices}{
-    \node at (0.25,0.75) {\tiny  0};
-    \node at (0.75,0.75) {\tiny  1};
-    \node at (1.25,0.75) {\tiny  2};
-    \node at (1.75,0.75) {\tiny  3};
-    \node at (2.25,0.75) {\tiny  4};
-    \node at (2.75,0.75) {\tiny  5};
-    \node at (3.25,0.75) {\tiny  6};
-    \node at (3.75,0.75) {\tiny  7};
-    \node at (4.25,0.75) {\tiny  8};
-    \node at (4.75,0.75) {\tiny  9};
-    \node at (5.25,0.75) {\tiny 10};
-    \node at (5.75,0.75) {\tiny 11};
-    \node at (6.25,0.75) {\tiny 12};
-    \node at (6.75,0.75) {\tiny 13};
-    \node at (7.25,0.75) {\tiny 14};
-    \node at (7.75,0.75) {\tiny 15};
-    \node at (8.25,0.75) {\tiny 16};
-    \node at (8.75,0.75) {\tiny 17};
-    \node at (9.25,0.75) {\tiny 18};
-    \node at (9.75,0.75) {\tiny 19};
-}
-
-
-
 \begin{document}
 
 \frame{\titlepage}
@@ -114,462 +66,41 @@
 
 
 \begin{frame}
- \frametitle{Introduction}
+ \frametitle{Rappel du cours précédent}
 
- Certains calculs sur les listes sont très fréquents :
-   \begin{itemize}
-   \item la recherche d'informations
-   \item le tri des informations
-   \end{itemize}
-   \begin{center}
-     \includegraphics[scale=.32]{30Bases.png}
-   \end{center}
+ Chercher un élément dans une liste non triée de taille $n$ peut se faire par
+ \emph{recherche exhaustive}
 
- Ces opérations sont pré-définies en Python :
-   \begin{itemize}
-   \item \code{e in lst} \quad \emph{ou} \quad \code{i = lst.index(e)}
-   \item \code{sorted(lst)} \quad \emph{ou} \quad \code{lst.sort()}
-   \end{itemize}
-
- Comment sont-elles implémentées ?
+ \begin{itemize}
+    \item Complexité $O(n)$
+    \item Sans autre hypothèse on ne peut pas faire mieux
+ \end{itemize}
 
 \end{frame}
-
-
-\section{Recherche d'élément}
 
 \begin{frame}
-  \frametitle{Recherche d'un élément}
+ \frametitle{Rappel du cours précédent}
 
-  \begin{probleme}[recherche]\small
-    \textbf{Données:} une liste \code{lst}, un élément \code{x}\\
-    \textbf{Question:} est-ce que \code{lst} contient \code{x}? % (si oui, donner sa position)
-  \end{probleme}
+ Chercher un élément dans une liste \emph{triée} de taille $n$ peut se faire
+ par \emph{recherche binaire} (ou \emph{dichotomie})
 
-  \pause
-  \vfill
-
-  Algorithme simple : \defterm{recherche exhaustive}
-  \begin{itemize}
-  \item Pour chaque élément \code{elem} de \code{lst}
-    \begin{itemize}
-    \item Si \code{elem} vaut \code{x}, répondre \code{True}
-    \end{itemize}
-  \item À la fin du parcours, répondre \code{False}
-  \end{itemize}
-
+ \begin{itemize}
+    \item Complexité $O(\log n)$ (exponentiellement plus rapide !!)
+    \item Sans autre hypothèse on ne peut pas faire mieux
+ \end{itemize}
 
 \end{frame}
 
+\begin{frame}
+ \frametitle{Rappel du cours précédent}
 
-\begin{frame}<handout:0>[fragile]
-  \frametitle{Recherche exhaustive (itérative)}
+ Conclusion : si on a besoin de chercher fréquemment, on a intérêt à trier (ou à maintenir les données triées)
 
-  \begin{itemize}
-  \item Pour chaque élément successif \code{elem} de \code{lst}
-    \begin{itemize}
-    \item Si \code{elem} vaut \code{x}, répondre \code{True}
-    \end{itemize}
-  \item À la fin du parcours, répondre \code{False}
-  \end{itemize}
-
-  \vfill
-
-\begin{pyframe}{}
-def rech_exh_iter(lst, x):
-    for elem in lst:
-        if elem == x:
-            return True
-    return False
-\end{pyframe}
-\end{frame}
-
-
-\begin{frame}[fragile]
-  \frametitle{Recherche exhaustive (itérative)}
-
-  \begin{itemize}
-  \item Pour chaque élément \code{elem} de \code{lst}
-    \begin{itemize}
-    \item Si \code{elem} vaut \code{x}, répondre \code{True}
-    \end{itemize}
-  \item À la fin du parcours, répondre \code{False}
-  \end{itemize}
-
-  \vfill
-
- Complexité :
 \begin{itemize}
-\item 1 comparaison au mieux, \code{len(lst)} au pire\\
-  Total : $O(\code{len(lst)})$ même avec opérations cachées
-\item Coût supplémentaire en espace : $O(1)$
-\end{itemize}
-\end{frame}
+    \item Si ce n'est pas trop coûteux !
+    \item D'où l'intérêt d'algorithmes \emph{efficaces}
+ \end{itemize}
 
-
-\begin{frame}<handout:0>[fragile]
-  \frametitle{Recherche exhaustive (récursive)}
-
-  Version récursive :
-  \begin{itemize}
-  \item S'il n'y a plus d'élément non vu, répondre \code{False}
-  \item Sinon si le premier élément non vu vaut \code{x} répondre \code{True}
-  \item Sinon, rechercher \code{x} parmi les éléments suivants
-  \end{itemize}
-
-  \pause
-  \vfill
-
-\begin{pyframe}{}
-def rech_exh_rec(lst, x, i=0):
-    if i >= len(lst):
-        return False
-    if lst[i] == x:
-        return True
-    return rech_exh_rec(lst, x, i+1)
-\end{pyframe}
-
-\end{frame}
-
-
-\begin{frame}[fragile]
-  \frametitle{Recherche exhaustive (récursive)}
-
-  Version récursive (\code{d} : indice de début de recherche) :
-  \begin{itemize}
-  \item S'il n'y a plus d'élément non vu, répondre \code{False}
-  \item Sinon si le premier élément non vu vaut \code{x} répondre \code{True}
-  \item Sinon, rechercher \code{x} parmi les éléments suivants
-  \end{itemize}
-
-  \vfill
-
-  Complexité :
-  \begin{itemize}
-  \item Coût en opérations : $O(\code{len(lst)})$
-  \item \defterm{Attention :} coût en espace $O(\code{len(lst)})$ !
-  \end{itemize}
-
-\end{frame}
-
-% TODO : exo : renvoyer l'indice
-
-\begin{frame}
-  \frametitle{Recherche exhaustive : discussion}
-
-  Peut-on faire mieux (moins d'accès à la liste) ?
-
-  \begin{itemize}
-  \item Soit \code{f} une recherche en moins de \code{len(lst)-1}
-    accès
-  \item Soit \code{lst} une liste quelconque d'entiers
-    \defterm{positifs}
-  \item \code{f(lst, -1)} renvoie forcément \code{False}
-  \item Soit \code{i} l'indice d'un élément non vu
-  \item Si l'on avait eu \code{-1} dans \code{lst[i]} on aurait aussi eu
-    \code{False}\\ $\longrightarrow$ fonction \defterm{incorrecte} !
-  \end{itemize}
-
-  \vfill
-
-  \defterm{Conclusion :} si on ne sait rien sur la liste, on ne peut
-  pas faire mieux que \code{len(lst)} comparaisons !
-
-  % \vfill
-
-  % \emph{\color{gray}\footnotesize $\star$ L'argument suppose que
-  %   \code{f} accède aux éléments dans un ordre fixé, mais on peut
-  %   l'adapter même si ce n'est pas le cas}
-\end{frame}
-
-
-\begin{frame}
-  \frametitle{Recherche sur une liste triée}
-
-  Et sur une liste triée (par ex. croissante) ?
-
-
-  \vfill
-
-  \defterm{Échauffement :} je pense à un nombre entre 1 et
-  1000000. Devinez-le.
-
-  \begin{itemize}
-  \item Vous avez le droit de proposer n'importe quel nombre
-  \item Je réponds ``trouvé'', ``plus petit'' ou ``plus grand''
-  \end{itemize}
-
-  En combien de questions êtes-vous sûrs de gagner ?
-\end{frame}
-
-
-\begin{frame}
-  \frametitle{Recherche sur une liste triée}
-
-  Et sur une liste triée (par ex. croissante) ? Procéder par
-  \defterm{dichotomie}
-  \begin{itemize}
-  \item Si on voit un élément trop petit, inutile de chercher avant
-  \item Si on voit un élément trop grand, inutile de chercher après
-  \item Pour éliminer le plus de cas possible on regarde toujours au
-    milieu de l'intervalle
-  \end{itemize}
-
-  \vfill
-
-  Analogies :
-  \begin{itemize}
-  \item Jeu de la devinette
-    % (comment deviner un nombre en posant le moins de question
-    % possible ?)
-  \item Recherche d'un nom dans l'annuaire
-  \end{itemize}
-
-\end{frame}
-
-
-\begin{frame}<handout:0>
- \frametitle{La recherche dichotomique en action}
-\begin{itemize}
-  \item Avant de présenter l'algorithme, illustrons son action sur un exemple simple:
-\end{itemize}
-
-
-\begin{exemple}
-Recherchons l'élément 112:
-\begin{center}
-\begin{tikzpicture}
-\tableau{20}{1};
-% contenu
-\exempledichotomiecontenu;
-% positions
-\exempledichotomieindices;
-
-\only<1-3>{
-    % verifier élément du milieu
-    \node at (0.25,1.05) {\code{g}};
-    \node at (9.75,1.10) {\code{d}};
-}
-
-\only<2>{
-    \node[fill=blue,opacity=.5,inner sep=7pt] at (4.75, 0.25) {};
-}
-
-\only<2-3>{
-    % verifier élément du milieu
-    \node at (4.75,1.05) {\code{m}};
-}
-
-\only<3->{
-    % retirer la moitié:
-    \foreach \p in {0.25, 0.75, ..., 4.75}
-        \node[fill=red,opacity=.5,inner sep=7pt] at (\p, 0.25) {};
-}
-
-\only<4-6>{
-    % verifier élément du milieu
-    \node at (5.25,1.05) {\code{g}};
-    \node at (9.75,1.10) {\code{d}};
-}
-
-\only<5>{
-    \node[fill=blue,opacity=.5,inner sep=7pt] at (7.25, 0.25) {};
-}
-
-\only<5-6>{
-    \node at (7.25,1.05) {\code{m}};
-}
-
-\only<6->{
-    % retirer la moitié:
-    \foreach \p in {7.25, 7.75, ..., 9.75}
-        \node[fill=red,opacity=.5,inner sep=7pt] at (\p, 0.25) {};
-}
-
-\only<7-9>{
-    % verifier élément du milieu
-    \node at (5.25,1.05) {\code{g}};
-    \node at (6.75,1.10) {\code{d}};
-}
-
-\only<8> {
-    \node at (5.75,1.05) {\code{m}};
-    \node[fill=blue,opacity=.5,inner sep=7pt] at (5.75, 0.25) {};
-}
-
-\only<9->{
-    % retirer la moitié:
-    \foreach \p in {5.25, 5.75}
-        \node[fill=red,opacity=.5,inner sep=7pt] at (\p, 0.25) {};
-}
-
-\only<10-12>{
-    \node at (6.25,1.05) {\code{g}};
-    \node at (6.75,1.10) {\code{d}};
-}
-
-\uncover<11>{
-    \node at (6.25,-0.5) {\code{m}};
-    \node[fill=blue,opacity=.5,inner sep=7pt] at (6.25, 0.25) {};
-}
-
-\only<12->{
-    % retirer la moitié:
-%     \foreach \p in {5.25, 5.75}
-    \node[fill=red,opacity=.5,inner sep=7pt] at (6.25, 0.25) {};
-}
-
-\uncover<13->{
-    \node at (6.75,1.5) {\code{g}};
-    \node at (6.75,1.10) {\code{d}};
-}
-
-\uncover<14->{
-    \node at (6.75,-0.5) {\code{m}};
-    \node[fill=green,opacity=.5,inner sep=7pt] at (6.75, 0.25) {};
-}
-\end{tikzpicture}
-\end{center}
-\end{exemple}
-\end{frame}
-
-
-\begin{frame}
-  \frametitle{Recherche par dichotomie (itérative)}
-
-  Soient \code{lst} une liste croissante, \code{x} un élément,
-  \code{g} et \code{d} deux indices
-
-  \vfill
-
-  \begin{itemize}
-  \item Tant que l'intervalle $[\code{g}, \code{d}]$ contient au moins
-    un élément :
-    \begin{itemize}
-    \item Calculer \code{m = (g + d) // 2}
-    \item Si \code{lst[m] == x}, répondre \code{True}
-    \item Si \code{lst[m] < x}, fixer \code{g} à \code{m+1}
-    \item Si \code{lst[m] > x}, fixer \code{d} à \code{m-1}
-    \end{itemize}
-  \end{itemize}
-
-\end{frame}
-
-
-\begin{frame}<handout:0>[fragile]
-\frametitle{Recherche par dichotomie (itérative)}
-
-\small
-\begin{pyframe}{}
-def dicho_iter(lst, x):
-    g, d = 0, len(lst) - 1
-    while g <= d:  # au moins un élément non vu
-        # on examine l'élément du milieu
-        m = (g + d) // 2
-        if lst[m] == x:
-            return True
-        elif lst[m] > x:
-            d = m - 1  # on élimine les trop grands
-        else:
-            g = m + 1  # on élimine les trop petits
-    return False  # pas trouvé
-\end{pyframe}
-\end{frame}
-
-
-\begin{frame}
-  \frametitle{Complexité de la recherche dichotomique}
-
-  \begin{itemize}
-  \item Chaque tour de boucle prend un temps $O(1)$
-  \item Au début du premier tour de boucle, on cherche parmi \code{len(lst)} éléments (\code{d - g} vaut \code{len(lst) - 1})
-  \item À chaque tour, on élimine une possibilité plus la moitié de ce qui reste ($d-g$ décrémenté et divisé par deux)
-  \item Si $d-g \leq 1$, la boucle s'arrête à la fin du tour
-    % \item Tout nombre $n$ peut être divisé par deux au plus
-    %   $\lfloor \log_2 n \rfloor + 1$ fois avant que le quotient soit
-    %   égal à 0\\
-    %   \emph{\small\color{gray} (revoir le cours de MPI)}
-
-  %   \medskip
-
-  % \item \defterm{Conclusion :} au pire $\Theta(\log_2 (\code{len(lst)}))$,
-  %   au mieux $\Theta(1)$
-  \end{itemize}
-\end{frame}
-
-
-\begin{frame}
-  \frametitle{Complexité de la recherche dichotomique}
-
-  Parmi combien de nombres peut-on trouver à coup sûr en $k$ tours de boucle ?
-
-  \[
-    \begin{array}[c]{l|c|c|c|c|c|c|c}
-      \hline
-      k & 1 & 2 & 3 & 4 & 5 & 6 & \ldots \\\hline
-      n & 1 & 3 & 7 & 15 & 31 & 63 & \ldots\\
-      \hline
-    \end{array}
-  \]
-
-
-  Conjecture : en $k$ tours on peut distinguer parmi $2^k - 1$ nombres
-  \begin{itemize}
-  \item Preuve : si on sait chercher parmi $n$ en $k$ questions, on
-    peut chercher parmi $2n + 1$ en $k+1$ questions
-  \item Suite déjà rencontrée dans le cours sur les tours de Hanoï
-  \end{itemize}
-\end{frame}
-
-
-\begin{frame}
-  \frametitle{Complexité de la recherche dichotomique}
-
-
-  Pour $n$ quelconque, on devra donc chercher au plus en $k$ tours où $k$ est
-  l'unique entier tel que :
-  \begin{align*}
-     & & 2^{k-1} - 1 & < n \leq 2^k - 1 \\
-    \text{soit } & & 2^{k-1} & \leq n < 2^k \\
-    \text{soit } & & k-1 & \leq \log_2 n < k \\
-    \text{soit } & & k = & \lfloor \log_2 n \rfloor + 1
-  \end{align*}
-
-
-  On obtient donc une complexité de la recherche dichotomique en
-  $O(\log_2(\code{len(lst)}))$ au pire
-\end{frame}
-
-
-\begin{frame}
-  \frametitle{Complexité de la recherche dichotomique}
-
-
-  \includegraphics[width=\textwidth]{graphe-comparaisons.png}
-\end{frame}
-
-
-
-\begin{frame}<handout:0>[fragile]
-\frametitle{Recherche dichotomique (récursive)}
-
-\small
-\begin{pyframe}{}
-def dicho_rec(lst, x, g=0, d=None):
-    if d is None:
-        d = len(lst) - 1
-    if g > d:
-        return False
-    m = (g + d) // 2
-    if lst[m] == x:
-        return True
-    if lst[m] > x:
-        # chercher dans la partie inférieure
-        return dicho_rec(lst, x, g, m-1)
-    else:
-        # chercher dans la partie supérieure
-        return dicho_rec(lst, x, m+1, d)
-\end{pyframe}
 \end{frame}
 
 
@@ -611,6 +142,49 @@ def dicho_rec(lst, x, g=0, d=None):
 
 
 \begin{frame}
+  \frametitle{Conversion en binaire}
+
+  \textbf{Exercice / rappel :} Écrire une fonction (itérative ou récursive)
+  \code{binaire(n)} recevant un entier positif \code{n} et renvoyant son
+  écriture en binaire sous la forme d'une liste de \code{0} et de
+  \code{1}.
+
+  Quelle est la complexité de la fonction ?
+\end{frame}
+
+
+\begin{frame}[fragile]
+  \frametitle{Conversion en binaire}
+
+  \begin{pyframe}{Binaire, version itérative}
+    def binaire(n):
+        res = []
+        while n != 0:
+            n, r = n // 2, n % 2
+            res.append(r)
+        res.reverse()
+        return res
+  \end{pyframe}
+\end{frame}
+
+
+\begin{frame}[fragile]
+  \frametitle{Conversion en binaire}
+
+  \begin{pyframe}{Binaire, version récursive}
+    def binaire(n):
+        if n == 0:
+            return []
+        else:
+            n, r = n // 2, n % 2
+            res = binaire(n)
+            res.append(r)
+            return res
+  \end{pyframe}
+\end{frame}
+
+
+\begin{frame}
   \frametitle{Nombre de chiffres d'un nombre}
 
   Soit $n$ un entier positif écrit \defterm{en base $b$}.\\
@@ -639,7 +213,6 @@ def dicho_rec(lst, x, g=0, d=None):
 \end{frame}
 
 
-
 \section{Tri de listes}
 
 \begin{frame}
@@ -659,8 +232,8 @@ def dicho_rec(lst, x, g=0, d=None):
 Remarques:
 \begin{enumerate}
 \item On suppose que les éléments de \code{lst} sont comparables
-\item On travaille ici sur des listes d'entiers, mais le raisonnement reste le
-même pour d'autres types
+\item On travaille ici sur des listes croissantes d'entiers, mais le
+raisonnement reste le même pour d'autres types
 \end{enumerate}
 \end{frame}
 

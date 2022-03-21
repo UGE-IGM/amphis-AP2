@@ -192,6 +192,11 @@ class DemoTris:
             self.redraw_list()
         return f
 
+    def above_rect(self, i):
+        rect = self.rectangles[i]
+        x1, y1, x2, _ = self.dessin.coords(rect)
+        return (x1 + x2) / 2, y1 - self.marge
+
     def draw_var(self, nom, i, couleur='red'):
         rect = self.rectangles[i]
         x1, y1, x2, y2 = self.dessin.coords(rect)
@@ -223,6 +228,16 @@ class DemoTris:
     def compare(self, i, j):
         if self.stop:
             raise StopAnimation
+        # self.dessin.delete('compare')
+        # rect1 = self.rectangles[i]
+        # x1, y1 = self.above_rect(i)
+        # x3, y3 = self.above_rect(j)
+        # x2 = (x1 + x3) / 2
+        # y2 = self.marge
+        # self.dessin.create_line(x1, y1, x1, y2, x1, y2,
+        #                         x2, y2, x3, y2, x3, y2, x3, y3,
+        #                         smooth="raw", splinesteps=24,
+        #                         tag='compare')
         return self.elems[i] - self.elems[j]
 
     def highlight(self, i, color='blue', no_delay=False):

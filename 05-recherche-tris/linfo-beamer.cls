@@ -49,7 +49,7 @@
 \newcommand{\myyear}[1]{\def \theyear {#1}}
 \newcommand{\mytitle}[1]{\def \thesubtitle {#1}}
 
-\titlegraphic{\includegraphics[scale=.3]{../../../latex/UPEM-IGM-V1_300dpi.png}}
+\titlegraphic{\includegraphics[scale=.3]{logo-igm.png}}
 \title{\thecoursename}
 \institute{\thecurriculum}
 \date{{\small \theyear}}
