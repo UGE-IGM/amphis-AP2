@@ -41,7 +41,7 @@ class DemoTris:
                  largeur=1000,
                  hauteur=600,
                  marge=10,
-                 couleur='green',
+                 couleur='lightgreen',
                  pause=False,
                  delay=200,
                  stepwise=False):
