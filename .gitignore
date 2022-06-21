@@ -1,1 +1,38 @@
+# Temporary Latex files
+*.aux
+*.amc
+*.fdb_latexmk
+*.fls
+*.log
+*.nav
+*.out
+*.snm
+*.synctex.gz
+*.toc
+*.vrb
 _minted*
+
+# Temporary Python files
+__pycache__
+*.pyc
+
+# Temporary R files
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+
+# VSCode
+.vscode
+
+# AMC
+amc-*
+DOC-*
+
+# Misc
+__MACOSX
+archive
+eval/cc?/corrections/
+eval/cc?/cr/
+eval/cc?/data/
+eval/cc?/scans/
