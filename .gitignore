@@ -15,6 +15,7 @@ _minted*
 # Temporary Python files
 __pycache__
 *.pyc
+.ipynb_checkpoints
 
 # Temporary R files
 .Rproj.user
@@ -36,3 +37,5 @@ eval/cc?/corrections/
 eval/cc?/cr/
 eval/cc?/data/
 eval/cc?/scans/
+.DS_Store
+.idea
