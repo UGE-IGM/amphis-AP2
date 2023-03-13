@@ -443,14 +443,13 @@ def tri_selection(lst):
 
   \begin{itemize}
 
-  \item Au lieu d'échanger deux éléments, on pourrait tout simplement
-    déplacer ceux qui sont ``mal placés''
+  \item « Tri du joueur de cartes »
 
     \medskip
 
   \item Pour chaque indice \code{i} entre 1 et \code{len(lst)-1}, on
     insère \code{lst[i]} ``à la bonne place'' parmi les \code{i}
-    premiers éléments
+    premiers éléments déjà triés
 
     \medskip
 
@@ -463,9 +462,9 @@ def tri_selection(lst):
 % ----------------------------------------------------------------------------
 
 \begin{frame}
- \frametitle{Insertion d'un élément}
+ \frametitle{Insertion d'un élément (sur place)}
 \begin{itemize}
-    \item Pour mettre en \oe uvre le tri par insertion, il faut donc savoir comment effectuer les réinsertions
+    \item Version modifiant la liste :
 \end{itemize}
 \begin{center}
   \begin{tikzpicture}
@@ -508,7 +507,7 @@ def tri_selection(lst):
 % ----------------------------------------------------------------------------
 
 \begin{frame}[fragile]
- \frametitle{Insertion d'un élément}
+ \frametitle{Insertion d'un élément (sur place)}
 
 % NOTE: ne leur montrer que ce qui est utile pour le tri, et leur faire faire l'autre sens en TD
 % NOTE: on peut faire plus simple en procédant par échanges successifs, mais on effectue à ce moment-là plus d'affectations

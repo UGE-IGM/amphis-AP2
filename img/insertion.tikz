@@ -1,0 +1,25 @@
+\begin{tikzpicture}
+\node[fill=green,opacity=.5,inner sep=5pt] at (0.25,0.25) {\tiny 1};
+\node[fill=green,opacity=.5,inner sep=5pt] at (0.75,0.25) {\tiny 2};
+\node[fill=green,opacity=.5,inner sep=5pt] at (1.25,0.25) {\tiny 5};
+\node[fill=green,opacity=.5,inner sep=5pt] at (1.75,0.25) {\tiny 7};
+\node at (2.25,0.25) {\tiny 3};
+\node at (2.75,0.25) {\tiny 4};
+\node at (3.25,0.25) {\tiny 6};
+
+\node[draw,very thick,red,circle] at (2.25,0.25) (a) {};
+\draw[->,very thick,red] (a) to [out=90,in=90] (1,0.55);
+\tableau{7}{1};
+
+\begin{scope}[xshift=150pt]
+    \draw[->,very thick] (-1.25, 0.25) -- (-0.35, 0.25);
+    \node[fill=green,opacity=.5,inner sep=5pt] at (0.25,0.25) {\tiny 1};
+    \node[fill=green,opacity=.5,inner sep=5pt] at (0.75,0.25) {\tiny 2};
+    \node[fill=orange,opacity=.5,inner sep=5pt] at (1.25,0.25) {\tiny 3};
+    \node[fill=green,opacity=.5,inner sep=5pt] at (1.75,0.25) {\tiny 5};
+    \node[fill=green,opacity=.5,inner sep=5pt] at (2.25,0.25) {\tiny 7};
+    \node at (2.75,0.25) {\tiny 4};
+    \node at (3.25,0.25) {\tiny 6};
+    \tableau{7}{1};
+\end{scope}
+\end{tikzpicture}
