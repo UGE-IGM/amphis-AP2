@@ -26,6 +26,9 @@ class Call:
         # update caller height
         if self.caller is not None:
             self.caller.height = max(self.caller.height, self.height + 1)
+            
+    def __repr__(self):
+        return f"{self.res} (Call object)"
 
     def do_call(self):
         CallRecorder.current = self
