@@ -1,0 +1,68 @@
+\documentclass[tikz,border=4]{standalone}
+\usepackage{tikz,}
+\usetikzlibrary{quotes,arrows,positioning}
+
+\begin{document}
+
+\definecolor{bleu}{RGB}{0,74,155}
+\definecolor{gris}{RGB}{155,155,155}
+\definecolor{rouge}{RGB}{230,56,18}
+\definecolor{vert}{RGB}{78,100,26}
+
+
+\tikzset{
+    every picture/.style={line width=1pt}, 
+    every edge quotes/.style={auto},
+    >=stealth,
+    bullet/.style={circle,fill=black,inner sep=2pt},
+%    scale=.5,
+%    transform shape,
+    label position=left
+}
+
+\tikzset{bpix/.style={fill=bleu, rectangle, minimum size=.7cm}}
+
+
+\newcommand{\tableau}[2]{
+    \draw[step=.5cm,line width=2pt,line cap=rect] (0,0) grid (#1*0.5,#2*0.5);
+}
+
+  \begin{tikzpicture}[font=\normalsize,
+                                level distance=4em,
+                                level 2/.style={sibling distance=5cm},
+                                level 3/.style={sibling distance=3cm},
+                                level 4/.style={sibling distance=2cm}]
+    \node {S($\{2, 9, 10, 7\}$, 19)}
+    child { node {S($\{9, 10, 7\}$, 17)}
+      child { node {S($\{10, 7\}$, 8)}
+        child { node[rouge] {S($\{7\}$, -2)}
+          edge from parent[left, inner sep=.8em] node {\em \color{gray} avec 10}
+        }
+        child { node {S($\{7\}$, 8)}
+          child { node[rouge] {S($\emptyset$, 1)}
+            edge from parent[left, inner sep=.7em] node {\em \color{gray} avec 7}
+          }
+          child { node[rouge] {S($\emptyset$, 8)}
+            edge from parent[right, inner sep=.7em] node {\em
+              \color{gray} sans 7}
+          }
+          edge from parent[right, inner sep=.8em] node {\em
+            \color{gray} sans 10}
+        }
+        edge from parent[left, inner sep=.9em] node {\em \color{gray} avec 9}
+      }
+      child { node {S($\{10, 7\}$, 17)}
+        child { node {S($\{7\}$, 7)}
+          child { node[vert] {S($\emptyset$, 0)}
+            edge from parent[right] node {\em \color{gray} avec 7}
+          }
+          edge from parent[right] node {\em \color{gray} avec 10}
+        }
+        edge from parent[right, inner sep=.9em] node {\em \color{gray}
+          sans 9}
+      }
+      edge from parent[right] node {\em \color{gray} avec 2}
+    };
+  \end{tikzpicture}
+
+\end{document}
