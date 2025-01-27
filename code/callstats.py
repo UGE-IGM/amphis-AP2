@@ -58,7 +58,7 @@ class Call:
             res.append("  |  " * (self.depth + 1))
             res.append(subcall.trace2())
         res.append("  |  " * (self.depth + 1))
-        res.append("  |  " * self.depth + "  \__ résultat : " + str(self.res))
+        res.append("  |  " * self.depth + "  \\__ résultat : " + str(self.res))
         return '\n'.join(res)
 
     def json(self):
@@ -102,11 +102,11 @@ class Call:
         aux(self)
         return G
 
-    def render(self, filename=None):
+    def render(self, verbose_labels=True, filename=None, prog='dot', format='png'):
         if filename is None:
-            self.graph().render(format='png')
+            self.graph(verbose_labels=verbose_labels).render(engine=prog, format=format, cleanup=True)
         else:
-            self.graph().render(filename, prog='dot', format='png')
+            self.graph(verbose_labels=verbose_labels).render(filename, engine=prog, format=format, cleanup=True)
 
 
 from copy import deepcopy
