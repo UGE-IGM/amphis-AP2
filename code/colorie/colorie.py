@@ -156,7 +156,6 @@ if __name__ == '__main__':
         'gray',
         'red',
         'magenta',
-        'brown',
         'light blue',
         'pink']
 
@@ -174,13 +173,13 @@ if __name__ == '__main__':
 
     ev = fltk.attend_ev()
     tev = fltk.type_ev(ev)
-    x, y = fltk.abscisse(ev), fltk.ordonnee(ev)
-    while tev == 'ClicGauche':
-        i, j = coord_case(x, y)
-        nouv = nouvelle_couleur(i, j)
-        remplit(i, j, nouv, pause=True)
+    while tev != 'Quitte':
+        if tev == 'ClicGauche':
+            x, y = fltk.abscisse(ev), fltk.ordonnee(ev)
+            i, j = coord_case(x, y)
+            nouv = nouvelle_couleur(i, j)
+            remplit(i, j, nouv)
         ev = fltk.attend_ev()
         tev = fltk.type_ev(ev)
-        x, y = fltk.abscisse(ev), fltk.ordonnee(ev)
 
     fltk.ferme_fenetre()

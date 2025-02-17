@@ -3,10 +3,10 @@ from upemtk import *
 nb_disques = 4
 nb_tours = 3
 largeur = 1000
-hauteur = 600
+hauteur = 450
 marge = 50
 altitude_sol = hauteur - 50
-hauteur_tours = 500
+hauteur_tours = hauteur - 2 * marge
 hauteur_disques = (hauteur_tours - 30) / nb_disques
 
 unit_diam = (largeur - 2*marge) / nb_tours / nb_disques
